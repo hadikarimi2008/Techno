@@ -133,7 +133,7 @@ export default function ProductFormSheet({ children, mode, product }) {
                   <SelectItem value="Phones">Phones</SelectItem>
                   <SelectItem value="laptops">Laptops</SelectItem>
                   <SelectItem value="watches">Watches</SelectItem>
-                  <SelectItem value="accessories">Tablets</SelectItem>
+                  <SelectItem value="tablets">Tablets</SelectItem>
                 </SelectContent>
               </Select>
             </div>
