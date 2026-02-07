@@ -63,7 +63,10 @@ export default function CheckoutPage() {
 
         <div className="flex flex-col gap-4">
           <Link href="/">
-            <button className="w-full bg-slate-900 text-white h-14 rounded-2xl font-black uppercase text-xs flex items-center justify-center gap-3">
+            <button
+              onClick={() => clearCart()}
+              className="w-full bg-slate-900 text-white h-14 rounded-2xl font-black uppercase text-xs flex items-center justify-center gap-3"
+            >
               <Home size={18} /> Return Home
             </button>
           </Link>
