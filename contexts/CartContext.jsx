@@ -94,7 +94,7 @@ export const CartProvider = ({ children }) => {
     setDbItems([]);
   };
 
-  const cartItems = userId ? dbItems : [];
+  const cartItems = dbItems;
 
   return (
     <CartContext.Provider
