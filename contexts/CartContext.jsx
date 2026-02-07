@@ -90,8 +90,14 @@ export const CartProvider = ({ children }) => {
     return dbItems.find((item) => item.id === productId)?.quantity || 0;
   };
 
-  const clearCart = () => {
+  const clearCart = async () => {
     setDbItems([]);
+    if (!userId) return;
+    try {
+      await fetch("/api/cart?clearAll=true", { method: "DELETE" });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const cartItems = dbItems;
