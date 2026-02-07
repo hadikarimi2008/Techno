@@ -15,7 +15,7 @@ import Image from "next/image";
 
 export function Banner() {
   return (
-    <Carousel opts={{ loop: true }} className="w-full max-w-5xl mx-auto mb-5">
+    <Carousel opts={{ loop: true }} className="w-full mx-auto mb-5">
       <CarouselContent>
         {[img1, img2, img3].map((image, index) => (
           <CarouselItem key={index}>
