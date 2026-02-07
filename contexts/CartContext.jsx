@@ -91,12 +91,13 @@ export const CartProvider = ({ children }) => {
   };
 
   const clearCart = async () => {
-    setDbItems([]);
+    setDbItems([]); // بلافاصله در ظاهر پاک کن
     if (!userId) return;
     try {
-      await fetch("/api/cart?clearAll=true", { method: "DELETE" });
+      const res = await fetch("/api/cart?clearAll=true", { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to clear cart on server");
     } catch (error) {
-      console.error(error);
+      console.error("Clear cart error:", error);
     }
   };
 

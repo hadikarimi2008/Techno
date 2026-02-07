@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Check, Home, Package, ArrowRight } from "lucide-react";
+import { Check, Home, Package } from "lucide-react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useCart } from "@/contexts/CartContext";
@@ -10,24 +10,30 @@ export default function CheckoutPage() {
   const { clearCart } = useCart();
   const [mounted, setMounted] = useState(false);
   const orderNumberRef = useRef(null);
-  const hascleared = useRef(false);
+  const hasCleared = useRef(false);
 
   useEffect(() => {
     if (!orderNumberRef.current) {
       orderNumberRef.current = Math.floor(Math.random() * 900000) + 100000;
     }
-
     setMounted(true);
 
-    if (!hascleared.current) {
-      toast.success("Order confirmed successfully!");
-      hascleared.current = true;
+    // به محض لود شدن صفحه سبد را پاک کن
+    if (!hasCleared.current) {
+      const performClear = async () => {
+        try {
+          await clearCart();
+          toast.success("Order confirmed successfully!");
+          hasCleared.current = true;
+        } catch (error) {
+          console.error("Failed to clear cart:", error);
+        }
+      };
+      performClear();
     }
   }, [clearCart]);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-6 py-20">
@@ -62,10 +68,7 @@ export default function CheckoutPage() {
 
         <div className="flex flex-col gap-4">
           <Link href="/">
-            <button
-              onClick={() => clearCart()}
-              className="w-full bg-slate-900 text-white h-14 rounded-2xl font-black uppercase text-xs flex items-center justify-center gap-3"
-            >
+            <button className="w-full bg-slate-900 text-white h-14 rounded-2xl font-black uppercase text-xs flex items-center justify-center gap-3">
               <Home size={18} /> Return Home
             </button>
           </Link>
