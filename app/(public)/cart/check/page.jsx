@@ -20,7 +20,6 @@ export default function CheckoutPage() {
     setMounted(true);
 
     if (!hascleared.current) {
-      clearCart();
       toast.success("Order confirmed successfully!");
       hascleared.current = true;
     }
