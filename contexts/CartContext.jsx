@@ -9,12 +9,13 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [dbItems, setDbItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { userId, isLoaded } = useAuth();
 
   useEffect(() => {
     const fetchCart = async () => {
       if (isLoaded && userId) {
+        setLoading(true);
         try {
           const res = await fetch("/api/cart");
           if (res.ok) {
@@ -22,20 +23,16 @@ export const CartProvider = ({ children }) => {
             setDbItems(data.cartItems || []);
           }
         } catch (error) {
-          console.error("Fetch error:", error);
+          console.error(error);
         } finally {
           setLoading(false);
         }
       } else {
         setDbItems([]);
-        setLoading(false);
       }
     };
-
     fetchCart();
   }, [userId, isLoaded]);
-
-  const cartItems = userId ? dbItems : [];
 
   const addToCart = async (product) => {
     if (!userId) return;
@@ -59,7 +56,7 @@ export const CartProvider = ({ children }) => {
         body: JSON.stringify({ productId: product.id, quantity: 1 }),
       });
     } catch (error) {
-      console.error("Add error:", error);
+      console.error(error);
     }
   };
 
@@ -85,18 +82,30 @@ export const CartProvider = ({ children }) => {
       const url = `/api/cart?productId=${productId}${removeCompletely ? "&removeCompletely=true" : ""}`;
       await fetch(url, { method: "DELETE" });
     } catch (error) {
-      console.error("Delete error:", error);
+      console.error(error);
     }
   };
 
   const getItemQuantity = (productId) => {
-    if (!userId) return 0;
     return dbItems.find((item) => item.id === productId)?.quantity || 0;
   };
 
+  const clearCart = () => {
+    setDbItems([]);
+  };
+
+  const cartItems = userId ? dbItems : [];
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, getItemQuantity, loading }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        getItemQuantity,
+        loading,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>
