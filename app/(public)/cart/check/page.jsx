@@ -13,25 +13,25 @@ export default function CheckoutPage() {
   const hasCleared = useRef(false);
 
   useEffect(() => {
+    setMounted(true);
+
     if (!orderNumberRef.current) {
       orderNumberRef.current = Math.floor(Math.random() * 900000) + 100000;
     }
-    setMounted(true);
 
-    // به محض لود شدن صفحه سبد را پاک کن
     if (!hasCleared.current) {
+      hasCleared.current = true;
       const performClear = async () => {
         try {
           await clearCart();
           toast.success("Order confirmed successfully!");
-          hasCleared.current = true;
         } catch (error) {
           console.error("Failed to clear cart:", error);
         }
       };
       performClear();
     }
-  }, [clearCart]);
+  }, []);
 
   if (!mounted) return null;
 
