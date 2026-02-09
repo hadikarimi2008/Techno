@@ -14,6 +14,7 @@ import { updateProduct } from "@/app/(private)/dashboard/actions";
 import { ChevronLeft, Image as ImageIcon, Save } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import ImageUploaderDiv from "../../components/ImageUploderDiv";
 
 export default async function UpdatePage({ params }) {
   const { id } = await params;
@@ -29,7 +30,6 @@ export default async function UpdatePage({ params }) {
   return (
     <div className="min-h-screen bg-[#fafafa] selection:bg-black selection:text-white">
       <div className="max-w-3xl mx-auto px-6 py-12">
-        {/* Navigation Header */}
         <div className="flex items-center justify-between mb-12">
           <Link
             href="/dashboard"
@@ -51,7 +51,6 @@ export default async function UpdatePage({ params }) {
         </div>
 
         <form action={updateProductWithId} className="space-y-12">
-          {/* Section: Basic Info */}
           <section className="bg-white p-8 rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.02),0_10px_40px_-12px_rgba(0,0,0,0.04)] border border-slate-100/50 space-y-8">
             <div className="grid gap-8">
               <div className="grid gap-3">
@@ -79,7 +78,6 @@ export default async function UpdatePage({ params }) {
               </div>
             </div>
 
-            {/* Price & Rating Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
               <div className="grid gap-3">
                 <Label className="text-[11px] uppercase tracking-[0.2em] font-bold text-slate-400">
@@ -116,7 +114,6 @@ export default async function UpdatePage({ params }) {
             </div>
           </section>
 
-          {/* Section: Inventory & Logistics */}
           <section className="bg-white p-8 rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.02),0_10px_40px_-12px_rgba(0,0,0,0.04)] border border-slate-100/50">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="grid gap-3">
@@ -149,27 +146,13 @@ export default async function UpdatePage({ params }) {
             </div>
           </section>
 
-          {/* Section: Media & Styles */}
           <section className="bg-white p-8 rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.02),0_10px_40px_-12px_rgba(0,0,0,0.04)] border border-slate-100/50 space-y-8">
             <div className="grid gap-3">
               <Label className="text-[11px] uppercase tracking-[0.2em] font-bold text-slate-400 flex items-center gap-2">
-                <ImageIcon className="w-3 h-3" /> Image Assets (URL)
+                <ImageIcon className="w-3 h-3" /> Product Visuals
               </Label>
-              <div className="flex flex-col md:flex-row gap-4 items-center">
-                <div className="w-20 h-20 rounded-xl bg-slate-50 border border-slate-100 overflow-hidden flex-shrink-0">
-                  <img
-                    src={product.img}
-                    alt="Preview"
-                    className="w-full h-full object-cover opacity-80"
-                  />
-                </div>
-                <Input
-                  name="img"
-                  required
-                  defaultValue={product.img}
-                  className="h-12 flex-1 border-none bg-slate-50/50 focus-visible:ring-2 focus-visible:ring-black/5 rounded-xl text-sm"
-                />
-              </div>
+              <ImageUploaderDiv defaultValue={product.img} />
+              <input type="hidden" name="img" defaultValue={product.img} />
             </div>
 
             <div className="grid gap-3">
@@ -185,7 +168,6 @@ export default async function UpdatePage({ params }) {
             </div>
           </section>
 
-          {/* Footer Actions */}
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-[11px] font-mono text-slate-400 uppercase leading-relaxed tracking-wider">
               <p>
@@ -203,7 +185,7 @@ export default async function UpdatePage({ params }) {
             <div className="mb-10">
               <Button
                 type="submit"
-                className="w-full sm:w-auto h-14 px-12 bg-black text-black hover:bg-slate-800 rounded-full transition-all shadow-xl shadow-black/10 active:scale-95 flex items-center gap-3 text-sm font-bold uppercase tracking-widest"
+                className="w-full sm:w-auto h-14 px-12 bg-black text-white hover:bg-slate-800 rounded-full transition-all shadow-xl shadow-black/10 active:scale-95 flex items-center gap-3 text-sm font-bold uppercase tracking-widest"
               >
                 <Save className="w-4 h-4" /> Save Record
               </Button>

@@ -19,11 +19,16 @@ async function uploadToCloudinary(file) {
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     cloudinary.uploader
       .upload_stream({ folder: "nextjs_store_products" }, (error, result) => {
-        if (error) reject(error);
-        else resolve(result.secure_url);
+        if (error) {
+          // به‌جای کرش کردن سرور، خطا را لاگ می‌کنیم و null برمی‌گردانیم
+          console.error("Cloudinary upload error:", error);
+          resolve(null);
+        } else {
+          resolve(result.secure_url);
+        }
       })
       .end(buffer);
   });
