@@ -19,36 +19,49 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest">
               Connect
             </h3>
             <div className="flex gap-5 text-[#343A40]">
-              <Link href="#" className="hover:text-[#0056B3] transition-colors">
-                <Instagram size={20} />
+              <Link
+                href="#"
+                className="hover:text-[#0056B3] transition-colors"
+                aria-label="Visit our Instagram"
+              >
+                <Instagram size={20} aria-hidden="true" />
               </Link>
-              <Link href="#" className="hover:text-[#0056B3] transition-colors">
-                <Send size={20} />
+              <Link
+                href="#"
+                className="hover:text-[#0056B3] transition-colors"
+                aria-label="Contact us on Telegram"
+              >
+                <Send size={20} aria-hidden="true" />
               </Link>
-              <Link href="#" className="hover:text-[#0056B3] transition-colors">
-                <MessageCircle size={20} />
+              <Link
+                href="#"
+                className="hover:text-[#0056B3] transition-colors"
+                aria-label="Chat with us on WhatsApp"
+              >
+                <MessageCircle size={20} aria-hidden="true" />
               </Link>
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+          <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">
             © 2025 TECHNO. ALL RIGHTS RESERVED.
           </p>
-          <p className="text-[11px] text-gray-400 flex items-center gap-2">
+          <p className="text-[11px] text-gray-500 flex items-center gap-2">
             DESIGNED & DEVELOPED BY{" "}
             <span className="text-[#343A40] font-bold">HADI</span>
             <Link
               href="https://github.com/hadikarimi2008"
               target="_blank"
               className="hover:opacity-70 transition-opacity ml-3"
+              aria-label="Visit Hadi's GitHub profile"
             >
-              <Github size={20} color="black" />
+              <Github size={20} color="black" aria-hidden="true" />
             </Link>
           </p>
         </div>

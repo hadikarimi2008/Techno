@@ -26,6 +26,8 @@ export function Banner() {
                     src={image}
                     alt={`Banner ${index + 1}`}
                     priority={index === 0}
+                    // جلوگیری از دانلود تصویر پهنای کامل روی موبایل
+                    sizes="(min-width: 1024px) 900px, (min-width: 768px) 700px, 100vw"
                     className="w-full h-auto object-contain rounded-lg"
                   />
                 </CardContent>

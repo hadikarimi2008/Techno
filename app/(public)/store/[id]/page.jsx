@@ -56,15 +56,15 @@ export default async function ProductDetail({ params }) {
       <StructuredData data={breadcrumbData} />
       <div className="min-h-screen bg-white pt-[12vh] pb-20">
         <div className="max-w-[1440px] mx-auto px-[6%] md:px-[4%]">
-        <Link
-          href="/store"
-          className="inline-flex items-center gap-2 text-gray-400 mb-12 group"
-        >
-          <ArrowLeft size={16} />
-          <span className="text-[10px] font-black tracking-[0.2em] uppercase group-hover:text-black transition-colors">
-            Back to Store
-          </span>
-        </Link>
+          <Link
+            href="/store"
+            className="inline-flex items-center gap-2 text-gray-500 mb-12 group"
+          >
+            <ArrowLeft size={16} />
+            <span className="text-[10px] font-black tracking-[0.2em] uppercase group-hover:text-black transition-colors">
+              Back to Store
+            </span>
+          </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 mb-32">
           <div className="bg-[#FBFBFB] rounded-[2.5rem] p-8 md:p-16 flex items-center justify-center border border-gray-50 shadow-sm h-fit">
@@ -83,7 +83,7 @@ export default async function ProductDetail({ params }) {
                   {product.rate}
                 </span>
               </div>
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+              <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">
                 Premium Device
               </span>
             </div>
@@ -98,7 +98,7 @@ export default async function ProductDetail({ params }) {
 
             {product.colors && product.colors.length > 0 && (
               <div className="mb-10">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] block mb-5">
+                <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] block mb-5">
                   Select Color
                 </span>
                 <div className="flex gap-4">
@@ -115,7 +115,7 @@ export default async function ProductDetail({ params }) {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-10 pt-10 border-t border-gray-100">
               <div>
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">
+                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-1">
                   Price
                 </span>
                 <span className="text-4xl font-black text-[#0056B3] tracking-tighter">
@@ -124,24 +124,29 @@ export default async function ProductDetail({ params }) {
               </div>
 
               <AddToCartButton product={product} />
-              <Link href="/cart">
+              <Link
+                href="/cart"
+                aria-label="Go to cart"
+                className="inline-flex items-center justify-center"
+              >
                 <ShoppingBag
                   size={25}
                   className="text-gray-400 hover:text-[#0056B3] transition-colors"
+                  aria-hidden="true"
                 />
               </Link>
             </div>
 
             <div className="flex gap-8 mt-12">
               <div className="flex items-center gap-2">
-                <Truck className="text-gray-300" size={18} />
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                <Truck className="text-gray-400" size={18} />
+                <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
                   Global Delivery
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="text-gray-300" size={18} />
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                <ShieldCheck className="text-gray-400" size={18} />
+                <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
                   Originality Guaranteed
                 </span>
               </div>

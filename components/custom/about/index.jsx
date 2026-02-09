@@ -12,7 +12,7 @@ export default function AboutSection() {
             </div>
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-[#343A40] tracking-tighter leading-none mb-6">
-                TECHNO <br /> <span className="text-gray-300">EVOLUTION.</span>
+                TECHNO <br /> <span className="text-gray-500">EVOLUTION.</span>
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed max-w-sm">
                 We bridge the gap between world-class innovation and your daily
@@ -27,7 +27,7 @@ export default function AboutSection() {
             <h3 className="text-2xl font-black tracking-tight relative z-10">
               FASTEST <br /> DELIVERY
             </h3>
-            <p className="text-gray-400 text-sm relative z-10">
+            <p className="text-gray-500 text-sm relative z-10">
               Your tech reaches you in record time, anywhere.
             </p>
           </div>

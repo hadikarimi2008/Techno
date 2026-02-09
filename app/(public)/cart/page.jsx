@@ -24,7 +24,7 @@ export default function Cart() {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
         <div className="bg-slate-50 p-8 rounded-full">
-          <LogIn size={48} className="text-slate-300" />
+          <LogIn size={48} className="text-slate-400" />
         </div>
         <h2 className="text-2xl font-bold text-slate-800">Please Sign In</h2>
         <p className="text-slate-500 text-center max-w-md">
@@ -50,7 +50,7 @@ export default function Cart() {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
         <div className="bg-slate-50 p-8 rounded-full">
-          <ShoppingBag size={48} className="text-slate-300" />
+          <ShoppingBag size={48} className="text-slate-400" />
         </div>
         <h2 className="text-2xl font-bold text-slate-800">
           Your cart is empty
@@ -142,7 +142,7 @@ export default function Cart() {
               </div>
               <div className="h-[1px] bg-white/10 my-6" />
               <div className="flex justify-between items-end">
-                <span className="text-lg font-medium text-slate-300">
+              <span className="text-lg font-medium text-slate-400">
                   Total Price
                 </span>
                 <span className="text-3xl font-black text-white">

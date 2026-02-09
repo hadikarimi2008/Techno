@@ -37,8 +37,8 @@ export default function Welcome() {
               <ArrowUpRight size={20} />
             </Link>
 
-            <div className="flex flex-col">
-              <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
+          <div className="flex flex-col">
+            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
                 Scroll Down
               </span>
               <span className="text-[10px] font-black text-[#343A40] uppercase tracking-widest">

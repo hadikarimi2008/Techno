@@ -18,7 +18,11 @@ export default function CartIcon() {
   const totalItems = cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
   return (
-    <Link href="/cart" className="relative group p-2">
+    <Link
+      href="/cart"
+      className="relative group p-2"
+      aria-label={`Open cart with ${totalItems} item${totalItems === 1 ? "" : "s"}`}
+    >
       <ShoppingBag
         size={26}
         strokeWidth={1.5}

@@ -1,9 +1,10 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 
 import Container from "@/components/custom/container";
 import Header from "@/components/custom/header";
-import Footer from "@/components/custom/footer";
+const Footer = dynamic(() => import("@/components/custom/footer"));
 import { CartProvider } from "@/contexts/CartContext";
 import { Toaster } from "react-hot-toast";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -117,7 +118,7 @@ export default function RootLayout({ children }) {
             <CartProvider>
               <Header />
               <Container>
-                {children}
+                <main>{children}</main>
                 <Toaster />
               </Container>
               <Footer />

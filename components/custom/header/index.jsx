@@ -16,7 +16,10 @@ export default function Header() {
             </h1>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav
+            className="hidden md:flex items-center gap-8"
+            aria-label="Primary"
+          >
             <Link
               href="/"
               className="text-sm font-medium text-[#343A40] hover:text-[#0056B3] transition-colors"
