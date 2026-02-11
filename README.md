@@ -161,6 +161,7 @@
 
 ### Additional Libraries
 
+- **[Framer Motion 12.34.0](https://www.framer.com/motion/)** - Animation library for smooth UI interactions
 - **[react-hot-toast](https://react-hot-toast.com/)** - Toast notifications
 - **[axios](https://axios-http.com/)** - HTTP client
 - **[embla-carousel-react](https://www.embla-carousel.com/)** - Carousel component
