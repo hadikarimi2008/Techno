@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Welcome() {
   return (
@@ -11,22 +12,36 @@ export default function Welcome() {
 
       <div className="max-w-[1440px] mx-auto px-[6%] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-8 z-10">
-          <div className="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full mb-8">
+          <motion.div
+            initial={{ y: -200 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full mb-8"
+          >
             <span className="h-2 w-2 rounded-full bg-[#0056B3]"></span>
             <span className="text-[10px] font-black tracking-[0.2em] text-[#343A40] uppercase">
               Digital Experience
             </span>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ y: -200 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <h1 className="text-5xl md:text-8xl lg:text-[130px] font-black text-[#343A40] leading-[0.8] tracking-tighter mb-10">
               THE NEW <br />
               <span className="text-[#0056B3]">STANDARD</span> <br />
               OF TECH.
             </h1>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-8 items-center">
+          <motion.div
+            initial={{ y: 400 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-wrap gap-8 items-center"
+          >
             <Link
               href="/store"
               className="bg-[#343A40] text-white px-10 py-6 rounded-2xl flex items-center gap-4 transition-all"
@@ -37,18 +52,23 @@ export default function Welcome() {
               <ArrowUpRight size={20} />
             </Link>
 
-          <div className="flex flex-col">
-            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
+            <div className="flex flex-col">
+              <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
                 Scroll Down
               </span>
               <span className="text-[10px] font-black text-[#343A40] uppercase tracking-widest">
                 To Discover
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="lg:col-span-4 relative flex justify-center lg:justify-end">
+        <motion.div
+          initial={{ x: 500 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-4 relative flex justify-center lg:justify-end"
+        >
           <div className="relative w-full aspect-square max-w-[350px] border-2 border-black rounded-[4rem] flex items-center justify-center p-4">
             <div className="w-full h-full border border-dashed border-gray-200 rounded-[3.5rem] flex items-center justify-center">
               <div className="flex flex-col items-center">
@@ -65,7 +85,7 @@ export default function Welcome() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
