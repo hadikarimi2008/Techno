@@ -1,3 +1,7 @@
+
+
+![vecteezy_tecno-brand-logo-phone-symbol-name-white-design-chinese_20927598](https://github.com/user-attachments/assets/7ee459bc-6028-4b0c-9b7f-47ab7975b198)
+
 # 🛍️ Techno Shop - Premium E-Commerce Platform
 
 <div align="center">
