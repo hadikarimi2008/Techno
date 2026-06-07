@@ -2,7 +2,7 @@
 
 ![vecteezy_tecno-brand-logo-phone-symbol-name-white-design-chinese_20927598](https://github.com/user-attachments/assets/7ee459bc-6028-4b0c-9b7f-47ab7975b198)
 
-# 🛍️ Techno Shop - Premium E-Commerce Platform
+# Techno Shop - Premium E-Commerce Platform
 
 <div align="center">
 
@@ -16,93 +16,162 @@
 
 **A modern, full-featured e-commerce platform for tech products built with Next.js 16, React 19, and Prisma.**
 
-[Features](#-features) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Project Structure](#-project-structure) • [Environment Variables](#-environment-variables) • [API Routes](#-api-routes) • [Deployment](#-deployment)
+[Features](#features) • [Tech Stack](#tech-stack) • [Getting Started](#getting-started) • [Project Structure](#project-structure) • [Environment Variables](#environment-variables) • [API Routes](#api-routes) • [Deployment](#deployment)
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Getting Started](#-getting-started)
-- [Project Structure](#-project-structure)
-- [Environment Variables](#-environment-variables)
-- [Database Schema](#-database-schema)
-- [API Routes](#-api-routes)
-- [Key Features Explained](#-key-features-explained)
-- [Deployment](#-deployment)
-- [Scripts](#-scripts)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
+- [Database Schema](#database-schema)
+- [API Routes](#api-routes)
+- [Key Features Explained](#key-features-explained)
+- [Deployment](#deployment)
+- [Scripts](#scripts)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## 🎯 Overview
+## Overview
 
-**Techno Shop** is a premium e-commerce platform specializing in tech products including smartphones, laptops, tablets, and smartwatches. The platform features a modern, responsive design with advanced shopping cart functionality, user authentication, product management, and comprehensive SEO optimization.
+**Techno Shop** is a premium e-commerce platform specializing in tech products including smartphones, laptops, tablets, and smartwatches. The platform features a modern, responsive design with advanced shopping cart functionality, user authentication, product management, contact form handling, admin user management, and comprehensive SEO optimization.
 
 ### Key Highlights
 
-- 🚀 **Next.js 16** with App Router
-- ⚡ **React 19** with Server Components
-- 🔐 **Clerk Authentication** for secure user management
-- 🛒 **Persistent Shopping Cart** per user
-- 📱 **Fully Responsive** design
-- 🔍 **Advanced Search & Filtering**
-- 📊 **Admin Dashboard** for product management
-- 🎨 **shadcn/ui** component library
-- 📈 **SEO Optimized** with Structured Data
+- **Next.js 16** with App Router
+- **React 19** with Server Components
+- **Clerk Authentication** for secure user management
+- **Persistent Shopping Cart** per user
+- **Fully Responsive** design
+- **Advanced Search & Filtering**
+- **Admin Dashboard** for products, users, and contact messages
+- **Contact Page** with form, map, and email notifications
+- **Product Color Management** with hex color picker
+- **Cookie Consent Banner** for privacy compliance
+- **shadcn/ui** component library
+- **SEO Optimized** with Structured Data
 
 ---
 
-## ✨ Features
+## Features
 
-### 🛍️ E-Commerce Features
+### E-Commerce Features
 
 - **Product Catalog**
   - Browse products by category (Phones, Laptops, Tablets, Watches)
-  - Product search functionality
+  - Product search functionality (title and description)
   - Category-based filtering
-  - Product detail pages with images and descriptions
-  - Product recommendations
+  - Product detail pages with images, descriptions, and color swatches
+  - Product recommendations (random related products on detail page)
+  - Home page product suggestions (3 random items from database)
 
 - **Shopping Cart**
-  - User-specific cart persistence
-  - Add/remove products
-  - Quantity management
+  - User-specific cart persistence in PostgreSQL
+  - Add/remove products with quantity management
   - Cart persists across sessions
-  - Real-time cart updates
+  - Real-time cart updates with optimistic UI
+  - Cart icon with item count badge in header (visible when logged in)
+  - Sign-in gate on add-to-cart for unauthenticated users
+
+- **Checkout Flow**
+  - Mock checkout confirmation page at `/cart/check`
+  - Order summary with tax calculation (5%) and free shipping
+  - Clears cart after successful checkout
+  - Toast notification on order completion
+  - No real payment integration (simulated order confirmation)
 
 - **User Authentication**
   - Secure authentication with Clerk
-  - User profiles
-  - Protected routes
-  - Admin role management
+  - Custom sign-in and sign-up pages with branded layout
+  - Protected routes and admin role management via `privateMetadata.isAdmin`
+  - Admin dashboard link in Clerk UserButton menu for admin users
 
-- **Admin Dashboard**
-  - Product CRUD operations
-  - Image upload with Cloudinary
-  - Product management interface
-  - Admin-only access
+### Admin Dashboard
 
-### 🎨 UI/UX Features
+- **Product Management**
+  - Product list table with preview image, category, price, and stock
+  - Add new products via slide-out sheet form (`ProductFormSheet`)
+  - Full-page dedicated edit form at `/dashboard/update/[id]`
+  - Delete products with confirmation dialog and toast feedback
+  - Image upload with Cloudinary integration (drag-and-drop support)
+  - Product color picker with hex color selection (`react-colorful`)
+  - Add/remove multiple product color swatches
+  - Color data normalization for corrupted legacy color values (`normalizeColors`)
+  - Server actions for create, update, and delete operations
+
+- **User Management** (`/dashboard/users`)
+  - View all Clerk users with avatar, email, phone, and status
+  - Ban and unban users via Clerk API
+  - Delete users from Clerk
+  - User creation date and last login display
+
+- **Contact Messages** (`/dashboard/emails`)
+  - Inbox for contact form submissions stored in database
+  - View message details (name, email, phone, subject, message, date)
+  - Delete individual messages
+  - Admin-only access via private layout guard
+
+- **Admin Navigation**
+  - Protected admin layout with navigation tabs: Products | Users | Emails
+  - Non-admin users are redirected to home page
+
+### Contact Page
+
+- **Contact Page** (`/contact`)
+  - Animated contact cards (phone, email, office) with Framer Motion
+  - Contact form with fields: name, email, phone, subject (dropdown), message
+  - Form submission saves to database and sends email notification via Resend
+  - Google Maps iframe for office location
+  - "Why Us" statistics section
+  - Dedicated layout with contact-specific SEO metadata
+
+### UI/UX Features
+
+- **Home Page**
+  - Animated welcome hero section with CTA to store
+  - Embla carousel banner with 3 promotional images
+  - About section with 4 animated feature blocks (CPU, delivery, warranty, global)
+  - Random product suggestions grid with Framer Motion animations
+
+- **Navigation & Layout**
+  - Fixed header with Home, Store, Contact links
+  - Mobile slide-out menu with navigation and auth
+  - Footer with brand info, social links, and GitHub credit
+  - Global loading spinner, error boundary with retry, and custom 404 page
+
+- **Cookie Consent**
+  - Privacy cookie consent banner (appears after 4 seconds)
+  - Accept/Decline options stored in `localStorage`
+  - Framer Motion slide-in animation
+  - Mounted globally in root layout
+
+- **Support Widget**
+  - Fixed bottom-left headset icon linking to `/support`
+  - Mounted globally in root layout
 
 - **Modern Design**
   - Clean, minimalist interface
-  - Smooth animations and transitions
+  - Smooth animations and transitions (Framer Motion)
   - Loading states with Skeleton components
   - Responsive mobile-first design
+  - Toast notifications for user feedback (`react-hot-toast`)
 
 - **Performance**
-  - Server-side rendering
-  - Image optimization
+  - Server-side rendering for product detail and dashboard pages
+  - Image optimization with Next.js Image component
   - Code splitting
-  - Optimistic UI updates
+  - Optimistic UI updates for cart operations
+  - React Compiler enabled in Next.js config
 
-### 🔍 SEO Features
+### SEO Features
 
 - **Structured Data (JSON-LD)**
   - Product schema
@@ -115,16 +184,17 @@
   - Open Graph tags
   - Twitter Cards
   - Canonical URLs
-  - Dynamic metadata per page
+  - Dynamic metadata per page (store, contact, cart layouts)
+  - Cart page set to `noindex`
 
 - **Technical SEO**
-  - Sitemap.xml generation
-  - Robots.txt configuration
+  - Sitemap.xml generation (home, store, cart, all product pages)
+  - Robots.txt configuration (blocks dashboard, API, auth routes)
   - Semantic HTML structure
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Core Framework
 
@@ -136,7 +206,7 @@
 
 - **[PostgreSQL](https://www.postgresql.org/)** - Relational database
 - **[Prisma 7.3.0](https://www.prisma.io/)** - Next-generation ORM
-- **[@prisma/adapter-pg](https://www.prisma.io/docs/concepts/components/prisma-adapter)** - PostgreSQL adapter
+- **[@prisma/adapter-pg](https://www.prisma.io/docs/concepts/components/prisma-adapter)** - PostgreSQL adapter with `pg` connection pool
 
 ### Authentication
 
@@ -144,7 +214,8 @@
   - User management
   - Session handling
   - Protected routes
-  - Admin roles
+  - Admin roles via `privateMetadata.isAdmin`
+  - User ban/unban/delete via Clerk Backend API
 
 ### Styling & UI
 
@@ -155,31 +226,35 @@
 
 ### State Management
 
-- **[React Context API](https://react.dev/reference/react/useContext)** - Global state
-- **[TanStack Query 5.90.20](https://tanstack.com/query)** - Server state management
+- **[React Context API](https://react.dev/reference/react/useContext)** - Global cart state
+- **[TanStack Query 5.90.20](https://tanstack.com/query)** - Server state provider (wired in root layout with devtools)
 
 ### Image & File Management
 
 - **[Cloudinary](https://cloudinary.com/)** - Image upload and optimization
 - **[Next.js Image](https://nextjs.org/docs/app/api-reference/components/image)** - Optimized images
 
+### Email
+
+- **[Resend](https://resend.com/)** - Transactional email for contact form notifications
+
 ### Additional Libraries
 
-- **[Framer Motion 12.34.0](https://www.framer.com/motion/)** - Animation library for smooth UI interactions
-- **[react-hot-toast](https://react-hot-toast.com/)** - Toast notifications
-- **[axios](https://axios-http.com/)** - HTTP client
-- **[embla-carousel-react](https://www.embla-carousel.com/)** - Carousel component
+- **[Framer Motion 12.34.0](https://www.framer.com/motion/)** - Animation library for welcome, contact, cookies, about, and product sections
+- **[react-colorful 5.7.0](https://github.com/omgovich/react-colorful)** - Hex color picker for product color management
+- **[react-hot-toast 2.6.0](https://react-hot-toast.com/)** - Toast notifications for delete, checkout, and form feedback
+- **[embla-carousel-react](https://www.embla-carousel.com/)** - Banner carousel component
 
 ### Development Tools
 
 - **[ESLint](https://eslint.org/)** - Code linting
 - **[Prettier](https://prettier.io/)** - Code formatting
-- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[TypeScript](https://www.typescriptlang.org/)** - Type definitions for Node.js (project source is JavaScript/JSX)
 - **[React Compiler](https://react.dev/learn/react-compiler)** - Automatic optimization
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -187,6 +262,7 @@
 - PostgreSQL database
 - Clerk account (for authentication)
 - Cloudinary account (for image uploads)
+- Resend account (for contact form emails)
 
 ### Installation
 
@@ -224,6 +300,9 @@ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
+# Resend (for contact form emails)
+RESEND_API_KEY=your_resend_api_key
+
 # Site URL
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
@@ -241,7 +320,11 @@ npm run migrate
 npm run studio
 ```
 
-5. **Run the development server**
+5. **Set up admin access**
+
+In the Clerk Dashboard, set `isAdmin: true` in the user's **Private Metadata** to grant admin dashboard access.
+
+6. **Run the development server**
 
 ```bash
 npm run dev
@@ -251,104 +334,129 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 techno/
-├── app/                          # Next.js App Router
-│   ├── (private)/               # Protected routes
-│   │   └── dashboard/           # Admin dashboard
-│   │       ├── actions.js      # Server actions
-│   │       ├── page.jsx        # Dashboard page
-│   │       └── components/     # Dashboard components
-│   ├── (public)/               # Public routes
-│   │   ├── cart/               # Shopping cart
-│   │   │   ├── page.jsx        # Cart page
-│   │   │   └── check/          # Checkout page
-│   │   └── store/              # Store pages
-│   │       ├── page.jsx        # Store listing
-│   │       ├── [id]/           # Product detail
-│   │       └── layout.jsx      # Store layout
-│   ├── api/                    # API routes
-│   │   ├── cart/               # Cart API
-│   │   │   └── route.js        # GET, POST, DELETE
-│   │   └── products/           # Products API
-│   │       └── route.js        # GET products
-│   ├── sign-in/                # Authentication pages
-│   ├── sign-up/
-│   ├── layout.js               # Root layout
-│   ├── page.js                 # Home page
-│   ├── sitemap.js              # Sitemap generation
-│   └── robots.js               # Robots.txt
+├── app/                              # Next.js App Router
+│   ├── (private)/                   # Protected admin routes
+│   │   ├── layout.jsx               # Admin layout + isAdmin guard + nav
+│   │   └── dashboard/
+│   │       ├── actions.js           # Product CRUD server actions
+│   │       ├── page.jsx             # Product management table
+│   │       ├── ProductFormSheet.jsx # Add product slide-out form
+│   │       ├── components/
+│   │       │   ├── DeleteProductButton.jsx
+│   │       │   ├── ImageUploderDiv.jsx
+│   │       │   ├── ProductColorsPicker.jsx
+│   │       │   └── UpdateProductButton.jsx
+│   │       ├── update/[id]/page.jsx # Full-page product edit form
+│   │       ├── users/
+│   │       │   ├── actions.js       # Clerk user ban/unban/delete
+│   │       │   └── page.jsx         # User management page
+│   │       └── emails/
+│   │           ├── actions.js       # Delete contact messages
+│   │           └── page.jsx         # Contact messages inbox
+│   ├── (public)/                    # Public routes
+│   │   ├── cart/
+│   │   │   ├── layout.jsx           # Cart metadata (noindex)
+│   │   │   ├── page.jsx             # Shopping cart page
+│   │   │   └── check/page.jsx       # Mock checkout confirmation
+│   │   ├── contact/
+│   │   │   ├── layout.jsx           # Contact metadata + JSON-LD
+│   │   │   └── page.jsx             # Contact page with form + map
+│   │   └── store/
+│   │       ├── layout.jsx           # Store metadata + JSON-LD
+│   │       ├── page.jsx             # Product listing with search/filter
+│   │       └── [id]/page.jsx        # Product detail with colors
+│   ├── api/
+│   │   ├── cart/route.js            # GET, POST, DELETE cart
+│   │   ├── contact/route.js         # POST contact form + Resend email
+│   │   └── products/route.js        # GET all products
+│   ├── sign-in/[[...sign-in]]/      # Clerk sign-in page
+│   ├── sign-up/[[...sign-up]]/      # Clerk sign-up page
+│   ├── provider/ReactQuery.jsx      # TanStack Query provider
+│   ├── layout.js                    # Root layout (Clerk, Cart, Cookie, Support)
+│   ├── page.js                      # Home page
+│   ├── loading.jsx                  # Global loading state
+│   ├── error.jsx                    # Error boundary
+│   ├── not-found.jsx                # Custom 404 page
+│   ├── sitemap.js                   # Dynamic sitemap generation
+│   ├── robots.js                    # Robots.txt configuration
+│   └── globals.css                  # Global styles
 │
-├── components/                  # React components
-│   ├── custom/                 # Custom components
-│   │   ├── about/              # About section
-│   │   ├── addToCart/          # Add to cart button
-│   │   ├── Auth/               # Authentication components
-│   │   ├── banner/             # Banner carousel
-│   │   ├── footer/             # Footer component
-│   │   ├── header/             # Header & navigation
-│   │   ├── SuggestionProduct/  # Product suggestions
-│   │   └── welcome/            # Welcome section
-│   ├── seo/                    # SEO components
-│   │   └── StructuredData.jsx  # JSON-LD schema
-│   └── ui/                     # shadcn/ui components
-│       ├── button.jsx
-│       ├── card.jsx
-│       ├── skeleton.jsx
-│       └── ...
+├── components/
+│   ├── custom/
+│   │   ├── about/                   # About section (home page)
+│   │   ├── addToCart/               # Add to cart button with sign-in gate
+│   │   ├── Auth/                    # Clerk auth + admin button
+│   │   ├── banner/                  # Embla carousel banner
+│   │   ├── ColorPicker/             # Reusable hex color picker component
+│   │   ├── ContactCard/             # Contact cards + contact form
+│   │   ├── container/               # Layout container wrapper
+│   │   ├── CookieConsent/           # Cookie consent banner
+│   │   ├── footer/                  # Site footer
+│   │   ├── header/                  # Header, cart icon, mobile menu
+│   │   ├── ImageUploader/           # Drag-and-drop image uploader
+│   │   ├── SuggestionProduct/       # Home page product suggestions
+│   │   ├── support/                 # Floating support widget
+│   │   └── welcome/                 # Home page hero section
+│   ├── seo/
+│   │   └── StructuredData.jsx       # JSON-LD schema injector
+│   └── ui/                          # shadcn/ui components
 │
-├── contexts/                    # React Context
-│   └── CartContext.jsx         # Shopping cart state
+├── contexts/
+│   └── CartContext.jsx              # Shopping cart global state
 │
-├── lib/                         # Utility libraries
-│   ├── prisma.js               # Prisma client
-│   ├── seo.js                  # SEO helpers
-│   └── utils.js                # Utility functions
+├── lib/
+│   ├── prisma.js                    # Prisma client with pg adapter
+│   ├── seo.js                       # JSON-LD schema generators
+│   ├── normalizeColors.js           # Product color array normalization
+│   └── utils.js                     # cn() Tailwind merge helper
 │
-├── modules/                     # Feature modules
-│   └── products/               # Product module
-│       ├── components/         # Product components
-│       │   ├── ProductItem.jsx
-│       │   ├── ProductList.jsx
-│       │   ├── ProductFilter.jsx
-│       │   ├── ProductSearch.jsx
-│       │   └── ProductSkeleton.jsx
-│       └── services/          # Product services
+├── modules/
+│   └── products/
+│       └── components/
+│           ├── ProductItem.jsx      # Product card with colors + cart
+│           ├── ProductList.jsx      # Product grid with skeleton loading
+│           ├── ProductFilter.jsx    # Category filter
+│           ├── ProductSearch.jsx    # Search by title/description
+│           └── ProductSkeleton.jsx  # Loading placeholder
 │
-├── prisma/                      # Database
-│   ├── migrations/            # Database migrations
-│   └── schema.prisma         # Database schema
+├── prisma/
+│   ├── migrations/                  # Database migrations
+│   └── schema.prisma               # Product, CartItem, ContactMessage
 │
-├── public/                      # Static assets
-│   ├── mock/                   # Product images
-│   └── uploads/                # Uploaded images
+├── public/
+│   ├── contact-image/               # Contact page card images
+│   └── uploads/                     # Local uploaded images
 │
-├── components.json              # shadcn/ui config
-├── next.config.mjs              # Next.js config
-├── package.json                 # Dependencies
-├── tailwind.config.js           # Tailwind config
-└── README.md                    # Project documentation
+├── components.json                  # shadcn/ui config
+├── next.config.mjs                  # Next.js config (React Compiler, Cloudinary)
+├── package.json
+├── tailwind.config.js
+├── README.md
+└── README-GitHub.md
 ```
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `DATABASE_URL` | PostgreSQL connection string | ✅ Yes |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key | ✅ Yes |
-| `CLERK_SECRET_KEY` | Clerk secret key | ✅ Yes |
-| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | ✅ Yes |
-| `CLOUDINARY_API_KEY` | Cloudinary API key | ✅ Yes |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret | ✅ Yes |
-| `NEXT_PUBLIC_SITE_URL` | Your site URL (for SEO) | ⚠️ Recommended |
+| `DATABASE_URL` | PostgreSQL connection string | Yes |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key | Yes |
+| `CLERK_SECRET_KEY` | Clerk secret key | Yes |
+| `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | Yes |
+| `CLOUDINARY_API_KEY` | Cloudinary API key | Yes |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret | Yes |
+| `RESEND_API_KEY` | Resend API key for contact form emails | Yes |
+| `NEXT_PUBLIC_SITE_URL` | Your site URL (for SEO and sitemap) | Recommended |
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### Product Model
 
@@ -383,6 +491,20 @@ model CartItem {
 }
 ```
 
+### ContactMessage Model
+
+```prisma
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+}
+```
+
 ### ProductCategory Enum
 
 ```prisma
@@ -396,12 +518,12 @@ enum ProductCategory {
 
 ---
 
-## 🔌 API Routes
+## API Routes
 
 ### Cart API (`/api/cart`)
 
 #### GET `/api/cart`
-Get user's shopping cart items.
+Get the authenticated user's shopping cart items. Returns empty cart if not logged in.
 
 **Response:**
 ```json
@@ -414,14 +536,14 @@ Get user's shopping cart items.
       "price": 999.99,
       "quantity": 2,
       "category": "Phones",
-      ...
+      "colors": ["#000000", "#c0c0c0"]
     }
   ]
 }
 ```
 
 #### POST `/api/cart`
-Add or update product in cart.
+Add or increment product quantity in cart.
 
 **Request Body:**
 ```json
@@ -432,16 +554,17 @@ Add or update product in cart.
 ```
 
 #### DELETE `/api/cart?productId=1&removeCompletely=false`
-Remove or decrease product quantity.
+Remove or decrease product quantity. Use `clearAll=true` to empty the entire cart.
 
 **Query Parameters:**
 - `productId` (required): Product ID
 - `removeCompletely` (optional): Remove completely or decrease quantity
+- `clearAll` (optional): Clear all cart items
 
 ### Products API (`/api/products`)
 
 #### GET `/api/products`
-Get all products.
+Get all products ordered by creation date (newest first).
 
 **Response:**
 ```json
@@ -452,15 +575,38 @@ Get all products.
       "title": "Product Name",
       "price": 999.99,
       "category": "Phones",
-      ...
+      "colors": ["#000000", "#ffffff"]
     }
   ]
 }
 ```
 
+### Contact API (`/api/contact`)
+
+#### POST `/api/contact`
+Submit a contact form message. Saves to database and sends email notification via Resend.
+
+**Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+1234567890",
+  "subject": "General Inquiry",
+  "message": "Hello, I have a question about..."
+}
+```
+
+**Response:**
+```json
+{
+  "ok": true
+}
+```
+
 ---
 
-## 🎯 Key Features Explained
+## Key Features Explained
 
 ### Shopping Cart System
 
@@ -468,38 +614,78 @@ The shopping cart is implemented with:
 - **User-specific persistence**: Each user has their own cart stored in the database
 - **Session persistence**: Cart persists across browser sessions
 - **Real-time updates**: Optimistic UI updates for better UX
-- **Context API**: Global cart state management
+- **Context API**: Global cart state management via `CartContext`
+- **Authentication gate**: Users must sign in to add items to cart
 
 ### Authentication Flow
 
 - **Clerk Integration**: Complete authentication solution
-- **Protected Routes**: Admin dashboard requires authentication
-- **Role-based Access**: Admin users can manage products
+- **Protected Routes**: Admin dashboard requires `isAdmin: true` in Clerk private metadata
+- **Role-based Access**: Admin users can manage products, users, and contact messages
 - **Session Management**: Automatic session handling
+- **Admin Menu**: Custom Clerk UserButton menu item links to `/dashboard`
 
 ### Product Management
 
-- **CRUD Operations**: Create, Read, Update, Delete products
-- **Image Upload**: Cloudinary integration for image storage
-- **Category Management**: Products organized by categories
-- **Search & Filter**: Advanced product filtering
+- **CRUD Operations**: Create, Read, Update, Delete products via server actions
+- **Dual Edit Interfaces**: Quick add via slide-out sheet; full edit via dedicated page
+- **Image Upload**: Cloudinary integration with drag-and-drop uploader
+- **Color Management**: Hex color picker to assign multiple product colors
+- **Color Normalization**: `normalizeColors` utility cleans malformed color data from legacy saves
+- **Category Management**: Products organized by categories (Phones, laptops, tablets, watches)
+- **Search & Filter**: Client-side search and category filtering on store page
+
+### Contact Form System
+
+- **Public Contact Page**: Animated cards, form, and embedded Google Maps
+- **Dual Storage**: Messages saved to PostgreSQL and emailed via Resend
+- **Admin Inbox**: Dashboard page to view and delete contact messages
+- **Form Fields**: Name, email, phone (optional), subject (dropdown), message
+
+### Admin User Management
+
+- **Clerk Integration**: Lists all users from Clerk Backend API
+- **User Actions**: Ban, unban, and delete users
+- **Status Display**: Shows banned/active status, creation date, and last login
+- **Admin Guard**: Only users with `isAdmin: true` can access admin routes
+
+### Product Colors
+
+- **Storage**: Product colors stored as `String[]` (hex values) in PostgreSQL
+- **Dashboard Picker**: `ProductColorsPicker` component with `react-colorful` for add/edit forms
+- **Storefront Display**: Color swatches on product cards (up to 4) and product detail pages
+- **Normalization**: `lib/normalizeColors.js` handles corrupted color arrays from legacy data
+
+### Cookie Consent
+
+- **Privacy Banner**: Appears after 4 seconds on first visit
+- **localStorage Persistence**: User choice stored as `cookie-consent` key
+- **Accept/Decline**: Both options dismiss the banner permanently
+
+### Checkout Flow
+
+- **Mock Checkout**: Simulated order confirmation at `/cart/check`
+- **Order Summary**: Displays subtotal, 5% tax, and free shipping
+- **Cart Clearing**: Empties cart via API after checkout
+- **No Payment**: No Stripe or payment gateway integration
 
 ### SEO Optimization
 
-- **Structured Data**: JSON-LD schemas for better search visibility
-- **Meta Tags**: Comprehensive Open Graph and Twitter Cards
-- **Sitemap**: Auto-generated sitemap.xml
+- **Structured Data**: JSON-LD schemas for products, organization, website, breadcrumbs, and store
+- **Meta Tags**: Comprehensive Open Graph and Twitter Cards per layout
+- **Sitemap**: Auto-generated sitemap.xml including all product pages
+- **Robots.txt**: Blocks admin, API, and auth routes from indexing
 - **Canonical URLs**: Prevent duplicate content issues
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
 1. Push your code to GitHub
 2. Import project in Vercel
-3. Add environment variables
+3. Add environment variables (including `RESEND_API_KEY`)
 4. Deploy!
 
 ### Other Platforms
@@ -521,12 +707,12 @@ For production, use a managed PostgreSQL service:
 
 ---
 
-## 📜 Scripts
+## Scripts
 
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server |
-| `npm run build` | Build for production |
+| `npm run build` | Generate Prisma Client and build for production |
 | `npm run start` | Start production server |
 | `npm run lint` | Run ESLint |
 | `npm run format` | Format code with Prettier |
@@ -536,7 +722,7 @@ For production, use a managed PostgreSQL service:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -548,17 +734,18 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Next.js](https://nextjs.org/) - The React Framework
 - [Clerk](https://clerk.com/) - Authentication
 - [Prisma](https://www.prisma.io/) - Database ORM
+- [Resend](https://resend.com/) - Email delivery
 - [shadcn/ui](https://ui.shadcn.com/) - Component library
 - [Tailwind CSS](https://tailwindcss.com/) - CSS framework
 
@@ -566,9 +753,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ using Next.js and React**
+**Made with Next.js and React**
 
-⭐ Star this repo if you find it helpful!
+Star this repo if you find it helpful!
 
 </div>
-
