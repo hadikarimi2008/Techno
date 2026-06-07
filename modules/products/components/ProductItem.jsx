@@ -5,12 +5,14 @@ import { ShoppingBag, Star, Tag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
+import { normalizeColors } from "@/lib/normalizeColors";
 
 export default function ProductItem({ product }) {
   const { addToCart, removeFromCart, getItemQuantity } = useCart();
 
   if (!product) return null;
 
+  const colors = normalizeColors(product.colors);
   const quantity = getItemQuantity(product.id);
 
   const handlePlus = (e) => {
@@ -73,7 +75,7 @@ export default function ProductItem({ product }) {
           </h3>
 
           <div className="flex gap-1.5">
-            {product.colors?.slice(0, 4).map((color, index) => (
+            {colors.slice(0, 4).map((color, index) => (
               <div
                 key={index}
                 style={{ backgroundColor: color }}

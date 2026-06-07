@@ -44,12 +44,15 @@ export default function Welcome() {
           >
             <Link
               href="/store"
-              className="bg-[#343A40] text-white px-10 py-6 rounded-2xl flex items-center gap-4 transition-all"
+              className="group bg-[#343A40] text-white px-10 py-6 rounded-2xl flex items-center gap-4 transition-all"
             >
               <span className="font-black text-xs tracking-[0.2em] uppercase">
                 Explore Store
               </span>
-              <ArrowUpRight size={20} />
+              <ArrowUpRight
+                size={20}
+                className="group-hover:rotate-48 transition-all"
+              />
             </Link>
 
             <div className="flex flex-col">

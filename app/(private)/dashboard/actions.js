@@ -47,7 +47,7 @@ export async function saveProduct(formData) {
 
   const data = {
     title: formData.get("title"),
-    img: imageUrl, // استفاده از آدرس آپلود شده
+    img: imageUrl,
     description: formData.get("description"),
     price: parseFloat(formData.get("price")) || 0,
     rate: parseFloat(formData.get("rate")) || 0,
@@ -57,13 +57,8 @@ export async function saveProduct(formData) {
       ? new Date(formData.get("createdAt"))
       : new Date(),
     updatedAt: new Date(),
-    colors: formData.get("colors")
-      ? formData
-          .get("colors")
-          .split(",")
-          .map((c) => c.trim())
-          .filter((c) => c !== "")
-      : [],
+
+    colors: formData.get("colors") ? JSON.parse(formData.get("colors")) : [],
   };
 
   try {
@@ -97,13 +92,7 @@ export async function updateProduct(productId, formData) {
     quantity: parseInt(formData.get("quantity")) || 0,
     category: formData.get("category"),
     updatedAt: new Date(),
-    colors: formData.get("colors")
-      ? formData
-          .get("colors")
-          .split(",")
-          .map((c) => c.trim())
-          .filter((c) => c !== "")
-      : [],
+    colors: formData.get("colors") ? JSON.parse(formData.get("colors")) : [],
   };
 
   try {

@@ -3,11 +3,23 @@
 
 ::selection {
   color: #fff;
-  background-color: #0056B3 !important;
+  background-color: #0056b3 !important;
 }
 
 body {
   overflow-x: hidden !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0056B3;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -130,4 +142,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-

@@ -32,6 +32,12 @@ export default function Header() {
             >
               Store
             </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-[#343A40] hover:text-[#0056B3] transition-colors"
+            >
+              Contact Us
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">

@@ -30,8 +30,10 @@
     "pg": "^8.18.0",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
+    "react-colorful": "^5.7.0",
     "react-dom": "19.2.3",
     "react-hot-toast": "^2.6.0",
+    "resend": "^6.12.4",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

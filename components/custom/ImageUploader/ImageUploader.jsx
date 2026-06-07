@@ -55,8 +55,7 @@ export default function ImageUploader({ onFileSelect }) {
         />
 
         <div className="flex flex-col items-center text-center space-y-4 p-10">
-          {/* آیکون متغیر بر اساس وضعیت انتخاب فایل */}
-          <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 group-hover:scale-110 transition-transform duration-300">
+          <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 transition-transform duration-300">
             {selectedFileName ? (
               <UploadCloud className="text-blue-600" size={32} />
             ) : (

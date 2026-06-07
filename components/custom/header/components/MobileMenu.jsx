@@ -53,14 +53,20 @@ export default function MobileMenu() {
             >
               Store
             </Link>
-            
+            <Link
+              href="/contact"
+              className="text-xl font-medium text-[#343A40]"
+            >
+              Contact Us
+            </Link>
+
             {/* Auth Buttons for Mobile */}
             <div className="flex flex-col gap-4 pt-4 border-t">
               <SignedOut>
                 <SignInButton>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="text-xl font-medium text-[#343A40] hover:text-[#0056B3] transition-colors text-left"
+                    className="text-xl font-medium text-[#343A40] hover:text-[#0056B3] transition-colors"
                   >
                     Sign In
                   </button>
@@ -76,7 +82,9 @@ export default function MobileMenu() {
               </SignedOut>
               <SignedIn>
                 <div className="flex items-center gap-4">
-                  <span className="text-xl font-medium text-[#343A40]">Account</span>
+                  <span className="text-xl font-medium text-[#343A40]">
+                    Account
+                  </span>
                   <UserButton />
                 </div>
               </SignedIn>

@@ -20,14 +20,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import { saveProduct } from "./actions"; // فرض بر این است که اکشن شما هر دو حالت را مدیریت می‌کند
+import { saveProduct } from "./actions";
 import ImageUploader from "@/components/custom/ImageUploader/ImageUploader";
+import { HexColorPicker } from "react-colorful";
 
 export default function ProductFormSheet({ children, mode, product }) {
   const [rateError, setRateError] = useState(false);
   const [open, setOpen] = useState(false);
-  // استیت برای ذخیره فایل انتخابی
+
   const [selectedFile, setSelectedFile] = useState(null);
+  const [color, setColor] = useState("#3b82f6");
+
+  const [colors, setColors] = useState(product?.colors || []);
 
   const formatDate = (date) => {
     if (!date) return "";
@@ -39,16 +43,24 @@ export default function ProductFormSheet({ children, mode, product }) {
     setRateError(value > 5);
   };
 
+  const addColor = () => {
+    if (!colors.includes(color)) {
+      setColors([...colors, color]);
+    }
+  };
+
+  const removeColor = (colorToRemove) => {
+    setColors(colors.filter((c) => c !== colorToRemove));
+  };
+
   async function handleSubmit(formData) {
-    // اگر فایلی انتخاب شده باشد، آن را به formData اضافه می‌کنیم
     if (selectedFile) {
       formData.append("imageFile", selectedFile);
     }
 
-    // ارسال formData و ID محصول به اکشن
     await saveProduct(formData, product?.id);
     setOpen(false);
-    setSelectedFile(null); // ریست کردن فایل بعد از ارسال
+    setSelectedFile(null);
   }
 
   return (
@@ -139,10 +151,8 @@ export default function ProductFormSheet({ children, mode, product }) {
             </div>
           </div>
 
-          {/* بخش آپلودر عکس */}
           <div className="space-y-1">
-            <Label>Product Image</Label>
-            {/* فیلد مخفی برای نگه داشتن URL فعلی در حالت ویرایش */}
+            <Label className="my-3">Product Image</Label>
             <Input type="hidden" name="img" defaultValue={product?.img} />
             <ImageUploader
               onFileSelect={(file) => setSelectedFile(file)}
@@ -150,9 +160,39 @@ export default function ProductFormSheet({ children, mode, product }) {
             />
           </div>
 
-          <div className="space-y-1">
-            <Label>Colors</Label>
-            <Input name="colors" defaultValue={product?.colors?.join(", ")} />
+          <div className="space-y-4">
+            <Label>Product Colors</Label>
+
+            <input type="hidden" name="colors" value={JSON.stringify(colors)} />
+
+            <div className="flex justify-center">
+              <HexColorPicker color={color} onChange={setColor} />
+            </div>
+
+            <div className="flex gap-2">
+              <Input
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                placeholder="#000000"
+              />
+
+              <Button type="button" onClick={addColor}>
+                Add
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {colors.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => removeColor(c)}
+                  className="w-8 h-8 rounded-full border-2 border-slate-300 hover:scale-110 transition"
+                  style={{ backgroundColor: c }}
+                  title={`Remove ${c}`}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4 border-t pt-4">

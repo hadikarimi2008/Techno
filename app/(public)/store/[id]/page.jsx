@@ -16,6 +16,7 @@ import {
   generateProductStructuredData,
   generateBreadcrumbStructuredData,
 } from "@/lib/seo";
+import { normalizeColors } from "@/lib/normalizeColors";
 
 export default async function ProductDetail({ params }) {
   const { id } = await params;
@@ -39,6 +40,7 @@ export default async function ProductDetail({ params }) {
     );
   }
 
+  const colors = normalizeColors(product.colors);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const productStructuredData = generateProductStructuredData(product, baseUrl);
   const breadcrumbData = generateBreadcrumbStructuredData(
@@ -96,13 +98,13 @@ export default async function ProductDetail({ params }) {
               {product.description}
             </p>
 
-            {product.colors && product.colors.length > 0 && (
+            {colors.length > 0 && (
               <div className="mb-10">
                 <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] block mb-5">
                   Select Color
                 </span>
                 <div className="flex gap-4">
-                  {product.colors.map((color, index) => (
+                  {colors.map((color, index) => (
                     <button
                       key={index}
                       style={{ backgroundColor: color }}

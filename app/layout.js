@@ -10,6 +10,8 @@ import { Toaster } from "react-hot-toast";
 import { ClerkProvider } from "@clerk/nextjs";
 import ReactQueryProvider from "./provider/ReactQuery";
 import { Metadata } from "next";
+import CookieConsent from "@/components/custom/CookieConsent";
+import Support from "@/components/custom/support";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -94,7 +96,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="format-detection" content="telephone=no" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <ClerkProvider
           appearance={{
             variables: {
@@ -119,6 +121,8 @@ export default function RootLayout({ children }) {
               <Header />
               <Container>
                 <main>{children}</main>
+                <Support />
+                <CookieConsent />
                 <Toaster />
               </Container>
               <Footer />

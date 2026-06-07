@@ -15,6 +15,7 @@ import { ChevronLeft, Image as ImageIcon, Save } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ImageUploaderDiv from "../../components/ImageUploderDiv";
+import ProductColorsPicker from "../../components/ProductColorsPicker";
 
 export default async function UpdatePage({ params }) {
   const { id } = await params;
@@ -159,12 +160,7 @@ export default async function UpdatePage({ params }) {
               <Label className="text-[11px] uppercase tracking-[0.2em] font-bold text-slate-400">
                 Available Colorways
               </Label>
-              <Input
-                name="colors"
-                placeholder="Black, Silver, Midnight"
-                defaultValue={product.colors?.join(", ")}
-                className="h-12 border-none bg-slate-50/50 focus-visible:ring-2 focus-visible:ring-black/5 rounded-xl"
-              />
+              <ProductColorsPicker defaultColors={product.colors || []} />
             </div>
           </section>
 
